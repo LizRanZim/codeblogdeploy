@@ -1,0 +1,40 @@
+header, .project:not(:last-child) {
+
+  border-bottom: 1px solid #ccc;
+}
+
+.no-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #1b89bc;
+  text-decoration: none;
+  font-size: 100%;
+}
+
+.no-button:hover {
+  color: #065b83;
+  text-decoration: underline;
+}
+
+
+
+h5 {
+  font-weight: lighter;
+}
+
+
+h6 {
+  font-size: 75%;
+  font-weight: lighter;
+}
+
+/* DISPLAY */
+.display-none {
+  display: none;
+}
+
+.display-block {
+  display: block;
+}

@@ -1,0 +1,53 @@
+<div class="row align-center mb-5">
+    <div class="column">
+        {{#each posts as |post| }}
+        <input class="input is-danger m-3" type="text" id="post-name">{{onePost.post_name}}
+
+        <textarea class="textarea is-danger m-3" 
+            id="post-description">{{onePost.post_description}}</textarea>
+
+        <button class="button is-danger m-3" id="edit-post-btn" data-postid={{editPost.id}}>Edit Post</button>
+        {{/each}}
+    </div>
+</div>
+
+
+{{!-- Form handler for editpost --}}
+
+<script>
+    const editPostFormHandler = async (event) => {
+        event.preventDefault();
+
+        const post_name = document.querySelector('#post-name').value.trim();
+
+        const post_description = document.querySelector('#post-description').value.trim();
+
+
+        // if post-text exists
+        if (post_name && post_description) {
+            const postBody = {
+                post_name: post_name,
+                post_description: post_description
+            }
+
+            const response = await fetch('../api/posts', {
+                method: 'POST',
+                body: JSON.stringify(postBody, post_id: postId),
+                headers: { 'Content-Type': 'application/json' },
+            });
+            console.log(response)
+
+            if (response.ok) {
+                console.log(response);
+                document.location.replace('/dashboard');
+            } else {
+                alert('Failed to edit post');
+            }
+        }
+    };
+
+    document
+        .querySelector('#edit-post-btn')
+        .addEventListener('click', editPostFormHandler);
+
+</script>

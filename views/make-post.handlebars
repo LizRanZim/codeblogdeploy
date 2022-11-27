@@ -1,0 +1,49 @@
+<div class="row align-center mb-5">
+  <div class="column">
+    <input class="input is-danger m-3" type="text" id="post-name" placeholder="Type Your Post Title Here">
+    <textarea class="textarea is-danger m-3" placeholder="Type Your Full Post Here" id="post-description"></textarea>
+
+    <button class="button is-danger m-3" id="save-post-btn">Save Post</button>
+  </div>
+</div>
+
+
+{{!-- Form handler for makepost --}}
+
+<script>
+  const makePostFormHandler = async (event) => {
+    event.preventDefault();
+
+    const post_name = document.querySelector('#post-name').value.trim();
+
+    const post_description = document.querySelector('#post-description').value.trim();
+
+
+    // if post-text exists
+    if (post_name && post_description) {
+      const postBody = {
+        post_name: post_name,
+        post_description: post_description
+      }
+
+      const response = await fetch('../api/posts', {
+        method: 'POST',
+        body: JSON.stringify(postBody),
+        headers: { 'Content-Type': 'application/json' },
+      });
+      console.log(response)
+
+      if (response.ok) {
+        console.log(response);
+        document.location.replace('/dashboard');
+      } else {
+        alert('Failed to make post');
+      }
+    }
+  };
+
+  document
+    .querySelector('#save-post-btn')
+    .addEventListener('click', makePostFormHandler);
+
+</script>

@@ -1,0 +1,92 @@
+{{!-- Logic from 14-28 --}}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to CodeBlog!</title>
+  <link rel="stylesheet" href="/css/mystyles.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+  <nav class="navbar" role="navigation" id="main-nav" aria-label="main navigation">
+
+    <h1 class="big-font title is-1"><a href="/" class="has-text-danger">This is CodeBlog</h1></a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+
+
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
+        <!-- Conditionally render login or logout links -->
+        {{!-- {{#if logged_in }} --}}
+        <a class="navbar-item" href="/">Homepage</a>
+        <a class="navbar-item" href="/dashboard">Dashboard</a>
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            {{#unless logged_in}}
+            <a class="navbar-item button is-danger" href="/login">Login</a>
+            {{/unless}}
+
+
+            {{#if logged_in}}
+            <div class="navbar-item button is-light" id="logout"> Logout</div>
+            {{/if}}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  </header>
+  <main class="container container-fluid mt-5">
+    <!-- Render the sub layout -->
+    {{{ body }}}
+  </main>
+  <footer>
+
+  </footer>
+  </div>
+
+  <!-- Render script for logged in users only -->
+  {{#if logged_in }}
+  <script src="/js/logout.js"></script>
+  {{/if}}
+</body>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // Get all "navbar-burger" elements
+      const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+      // Add a click event on each of them
+      $navbarBurgers.forEach(el => {
+        el.addEventListener('click', () => {
+
+          // Get the target from the "data-target" attribute
+          const target = el.dataset.target;
+          const $target = document.getElementById(target);
+
+          // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+          el.classList.toggle('is-active');
+          $target.classList.toggle('is-active');
+
+        });
+      });
+
+    });
+
+  </script>
+
+</html>
